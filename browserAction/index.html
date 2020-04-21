@@ -4,8 +4,14 @@
     <meta charset="UTF-8" />
     <link href="style.css" rel="stylesheet" />
   </head>
-  <body style="min-width: 300px;">
-    <label>Format<textarea id="format"></textarea></label>
+  <body>
+    <div style="display: flex; flex-direction: column;">
+      <label>Format<textarea id="format"></textarea></label>
+      <label>Variable Name<input id="variableName0" /></label>
+      <label>Variable Query<textarea id="variableQuery0"></textarea></label>
+
+      <button>Add variable</button>
+    </div>
 
     <script src="script.js"></script>
   </body>
