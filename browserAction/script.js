@@ -26,26 +26,14 @@ clipItEl.addEventListener("click", (e) => {
 });
 
 addButtonEl.addEventListener("click", () => {
-  const labelEl = document.createElement("label");
-  const labelText = document.createTextNode("Variable Name");
-  const input = document.createElement("input");
-  input.setAttribute("id", "myId");
-
-  labelEl.appendChild(labelText);
-  labelEl.appendChild(input);
-
   const variablesContainerEl = document.getElementById("variablesContainer");
-  variablesContainerEl.appendChild(labelEl);
 
-  const labelEl2 = document.createElement("label");
-  const labelText2 = document.createTextNode("Variable Query");
-  const textarea = document.createElement("textarea");
-  textarea.setAttribute("id", "myId2");
+  const section = document.createElement("section");
+  section.setAttribute("style", "display: flex; flex-direction: column");
+  section.innerHTML =
+    '<label>Variable Name<input id="myId"/></label><label>Variable Query<textarea id="myOtherId"></textarea></label>';
 
-  labelEl2.appendChild(labelText2);
-  labelEl2.appendChild(textarea);
-
-  variablesContainerEl.appendChild(labelEl2);
+  variablesContainerEl.appendChild(section);
 });
 
 /*** HYDRATE ***/
