@@ -1,0 +1,7 @@
+- variable queries are not run in the content script
+- use result of variable queries in format
+- investigate using a framework
+- be able to delete variables
+- weird fields population when there's no localStorage value.
+  - When you first open it there are no variables and no localStorage, if you add a variable and close the popup then reopen it there are TWO variables instead of one.
+- investigate using extension storage instead of local storage.
