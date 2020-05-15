@@ -7,10 +7,17 @@ formatEl.addEventListener("blur", (e) => {
 });
 
 clipItEl.addEventListener("click", (e) => {
+  const { variables } = JSON.parse(localStorage.getItem("state"));
+  const variablesString = JSON.stringify(variables);
   browser.tabs.executeScript({
-    code: `browser.runtime.sendMessage(${localStorage.getItem(
-      "variableQuery0"
-    )})`,
+    code: `
+      const variables = ${variablesString};
+      const queryResults = variables.map((variable) => {
+        return eval(variable.query);
+      });
+
+      browser.runtime.sendMessage(queryResults);
+    `,
   });
 });
 
