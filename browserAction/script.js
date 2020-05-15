@@ -11,9 +11,12 @@ clipItEl.addEventListener("click", (e) => {
   const variablesString = JSON.stringify(variables);
   browser.tabs.executeScript({
     code: `
-      const variables = ${variablesString};
-      const queryResults = variables.map((variable) => {
-        return eval(variable.query);
+      let variables = ${variablesString};
+      let queryResults = variables.map((variable) => {
+        return { 
+          result: eval(variable.query),
+          name: variable.name
+        };
       });
 
       browser.runtime.sendMessage(queryResults);
