@@ -7,22 +7,43 @@
   <body>
     <div id="app">
       <div style="display: flex; flex-direction: column;">
-        <label>Format<textarea v-model="format"></textarea></label>
-        <section
-          id="variablesContainer"
-          style="display: flex; flex-direction: column;"
-          v-for="(variable, i) in variables"
+        <label
+          >Selected Template
+          <select v-model="currentTemplate">
+            <option v-for="(template) in templates" :value="template.id"
+              >{{template.name || `Untitled ${template.id}`}}</option
+            >
+          </select></label
         >
-          <section style="display: flex; flex-direction: column;" :id="i">
+        <label
+          >Template Name<input v-model="templates[currentTemplate].name"
+        /></label>
+        <label
+          >Format<textarea
+            v-model="templates[currentTemplate].format"
+          ></textarea>
+        </label>
+        <section style="display: flex; flex-direction: column;">
+          <div
+            v-for="(variable, i) in variables"
+            style="display: flex; flex-direction: column;"
+          >
             <label>Variable Name<input v-model="variable.name" /></label>
             <label
               >Variable Query<textarea v-model="variable.query"></textarea>
             </label>
             <button v-on:click="removeVariable(i)">Remove</button>
-          </section>
+          </div>
         </section>
 
         <button v-on:click="addVariable">Add variable</button>
+        <button v-on:click="addTemplate">Add template</button>
+        <button
+          v-on:click="deleteTemplate(currentTemplate)"
+          :disabled="currentTemplate === 0"
+        >
+          Delete current template
+        </button>
         <button v-on:click="clipIt">Clip it!</button>
       </div>
     </div>

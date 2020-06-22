@@ -1,7 +1,14 @@
 new Vue({
   el: "#app",
   data: {
-    format: "",
+    currentTemplate: 0,
+    templates: {
+      0: {
+        id: 0,
+        name: "",
+        format: "",
+      },
+    },
     variables: [
       {
         name: "",
@@ -10,6 +17,14 @@ new Vue({
     ],
   },
   methods: {
+    addTemplate: function () {
+      const newId = Object.keys(this.templates).length;
+      Vue.set(this.templates, newId, {
+        id: newId,
+        name: "",
+        format: "",
+      });
+    },
     addVariable: function () {
       this.variables.push({ name: "", query: "" });
     },
@@ -29,29 +44,43 @@ new Vue({
     })()`,
       });
     },
+    deleteTemplate: function (templateId) {
+      Vue.delete(this.templates, templateId);
+      this.currentTemplate = 0;
+    },
     removeVariable: function (i) {
       this.variables.splice(i, 1);
     },
   },
   watch: {
+    currentTemplate: function () {
+      localStorage.setItem(
+        "currentTemplate",
+        JSON.stringify(this.currentTemplate)
+      );
+    },
     format: function () {
       localStorage.setItem("format", JSON.stringify(this.format));
     },
+    templates: {
+      handler: function () {
+        localStorage.setItem("templates", JSON.stringify(this.templates));
+      },
+      deep: true,
+    },
     variables: {
       handler: function () {
-        console.log("variables was changed", this.variables);
         localStorage.setItem("variables", JSON.stringify(this.variables));
       },
       deep: true,
     },
   },
   mounted() {
-    if (localStorage.getItem("format")) {
-      this.format = JSON.parse(localStorage.getItem("format"));
-    }
-
-    if (localStorage.getItem("variables")) {
-      this.variables = JSON.parse(localStorage.getItem("variables"));
-    }
+    Object.keys(this.$data).forEach((key) => {
+      const localStorageValue = localStorage.getItem(key);
+      if (localStorageValue) {
+        this[key] = JSON.parse(localStorageValue);
+      }
+    });
   },
 });
