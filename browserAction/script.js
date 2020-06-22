@@ -15,7 +15,6 @@ new Vue({
     },
     clipIt: function () {
       const variablesString = JSON.stringify(this.variables);
-      console.log(variablesString);
       browser.tabs.executeScript({
         code: `(function() {
       let variables = ${variablesString};
@@ -29,6 +28,9 @@ new Vue({
       browser.runtime.sendMessage(queryResults);
     })()`,
       });
+    },
+    removeVariable: function (i) {
+      this.variables.splice(i, 1);
     },
   },
   watch: {
