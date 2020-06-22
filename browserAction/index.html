@@ -5,16 +5,34 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <div style="display: flex; flex-direction: column;">
-      <label>Format<textarea id="format"></textarea></label>
-      <section
-        id="variablesContainer"
-        style="display: flex; flex-direction: column;"
-      ></section>
+    <div id="app">
+      <div style="display: flex; flex-direction: column;">
+        <label>Format<textarea v-model="format"></textarea></label>
+        <section
+          id="variablesContainer"
+          style="display: flex; flex-direction: column;"
+          v-for="(variable, i) in variables"
+        >
+          <section style="display: flex; flex-direction: column;" :id="i">
+            <label
+              >Variable Name<input
+                :id="'variableName_' + i"
+                v-model="variable.name"
+            /></label>
+            <label
+              >Variable Query<textarea
+                :id="'variableQuery_' + i"
+                v-model="variable.query"
+              ></textarea>
+            </label>
+          </section>
+        </section>
 
-      <button id="addButton">Add variable</button>
-      <button id="clipIt">Clip it!</button>
+        <button id="addButton" v-on:click="addVariable">Add variable</button>
+        <button id="clipIt">Clip it!</button>
+      </div>
     </div>
+    <script src="../Vue_v2.6.11.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

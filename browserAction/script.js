@@ -1,9 +1,48 @@
-formatEl = document.getElementById("format");
+// formatEl = document.getElementById("format");
 clipItEl = document.getElementById("clipIt");
 addButtonEl = document.getElementById("addButton");
 
-formatEl.addEventListener("blur", (e) => {
-  StateHandler.setFormat(e.target.value);
+// formatEl.addEventListener("blur", (e) => {
+//   StateHandler.setFormat(e.target.value);
+// });
+
+new Vue({
+  el: "#app",
+  data: {
+    format: "",
+    variables: [
+      {
+        name: "",
+        query: "",
+      },
+    ],
+  },
+  methods: {
+    addVariable: function () {
+      this.variables.push({ name: "", query: "" });
+    },
+  },
+  watch: {
+    format: function () {
+      localStorage.setItem("format", JSON.stringify(this.format));
+    },
+    variables: {
+      handler: function () {
+        console.log("variables was changed", this.variables);
+        localStorage.setItem("variables", JSON.stringify(this.variables));
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("format")) {
+      this.format = JSON.parse(localStorage.getItem("format"));
+    }
+
+    if (localStorage.getItem("variables")) {
+      this.variables = JSON.parse(localStorage.getItem("variables"));
+    }
+  },
 });
 
 clipItEl.addEventListener("click", (e) => {
@@ -81,7 +120,7 @@ const StateHandler = {
       StateHandler.state = state;
 
       if (StateHandler.state.format !== "") {
-        formatEl.value = StateHandler.state.format;
+        // formatEl.value = StateHandler.state.format;
       }
 
       StateHandler.state.variables.forEach((variable, i) => {
