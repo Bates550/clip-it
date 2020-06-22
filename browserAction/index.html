@@ -14,22 +14,15 @@
           v-for="(variable, i) in variables"
         >
           <section style="display: flex; flex-direction: column;" :id="i">
+            <label>Variable Name<input v-model="variable.name" /></label>
             <label
-              >Variable Name<input
-                :id="'variableName_' + i"
-                v-model="variable.name"
-            /></label>
-            <label
-              >Variable Query<textarea
-                :id="'variableQuery_' + i"
-                v-model="variable.query"
-              ></textarea>
+              >Variable Query<textarea v-model="variable.query"></textarea>
             </label>
           </section>
         </section>
 
-        <button id="addButton" v-on:click="addVariable">Add variable</button>
-        <button id="clipIt">Clip it!</button>
+        <button v-on:click="addVariable">Add variable</button>
+        <button v-on:click="clipIt">Clip it!</button>
       </div>
     </div>
     <script src="../Vue_v2.6.11.js"></script>
