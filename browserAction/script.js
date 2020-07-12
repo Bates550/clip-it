@@ -76,6 +76,16 @@ new Vue({
     },
   },
   mounted() {
+    // Initialize localStorage
+    if (!localStorage.getItem("isLocalStorageInitialized")) {
+      Object.keys(this.$data).forEach((key) => {
+        localStorage.setItem(key, JSON.stringify(this.$data[key]));
+      });
+
+      localStorage.setItem("isLocalStorageInitialized", true);
+    }
+
+    // Initialize Vue state
     Object.keys(this.$data).forEach((key) => {
       const localStorageValue = localStorage.getItem(key);
       if (localStorageValue) {
