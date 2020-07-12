@@ -10,3 +10,5 @@ x weird fields population when there's no localStorage value.
 - Divide app into two tabs: one for templates and one for a global set of variables
 - Make format input provide an autocomplete list of variables when you type "%"
 - How to deploy this?
+
+* Is there any sort of security implications or protections provided by executeScript
