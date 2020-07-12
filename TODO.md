@@ -18,4 +18,4 @@ x weird fields population when there's no localStorage value.
 
 BUGS
 
-- First template doesn't clipit?
+x First template doesn't clipit?
