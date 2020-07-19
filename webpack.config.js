@@ -1,5 +1,6 @@
 const path = require("path");
 
+const WebExtWebpackPlugin = require("./WebExtWebpackPlugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
@@ -32,5 +33,6 @@ module.exports = {
   plugins: [
     // make sure to include the plugin for the magic
     new VueLoaderPlugin(),
+    new WebExtWebpackPlugin(),
   ],
 };
