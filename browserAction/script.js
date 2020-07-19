@@ -1,6 +1,7 @@
-new Vue({
+const vm = new Vue({
   el: "#app",
   data: {
+    page: "templates", // 'templates' | 'variables'
     currentTemplate: 0,
     templates: {
       0: {
@@ -17,6 +18,9 @@ new Vue({
     ],
   },
   methods: {
+    setPage: function (pageName) {
+      this.page = pageName;
+    },
     addTemplate: function () {
       const newId = Object.keys(this.templates).length;
       Vue.set(this.templates, newId, {

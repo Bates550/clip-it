@@ -7,22 +7,20 @@
   <body>
     <div id="app">
       <div style="display: flex; flex-direction: column;">
-        <label
-          >Selected Template
-          <select v-model="currentTemplate">
-            <option v-for="(template) in templates" :value="template.id"
-              >{{template.name || `Untitled ${template.id}`}}</option
-            >
-          </select></label
-        >
-        <label
-          >Template Name<input v-model="templates[currentTemplate].name"
-        /></label>
-        <label
-          >Format<textarea
-            v-model="templates[currentTemplate].format"
-          ></textarea>
-        </label>
+        <div style="display: flex; flex-direction: row;">
+          View:
+          <button v-on:click="setPage('templates')">Templates</button>
+          <button v-on:click="setPage('variables')">Variables</button>
+        </div>
+
+        <page-template
+          v-if="page === 'templates'"
+          :current-template="currentTemplate"
+          :templates="templates"
+          @add-template="addTemplate"
+          @change-template="currentTemplate = $event.target.value"
+        ></page-template>
+
         <section style="display: flex; flex-direction: column;">
           <div
             v-for="(variable, i) in variables"
@@ -37,17 +35,11 @@
         </section>
 
         <button v-on:click="addVariable">Add variable</button>
-        <button v-on:click="addTemplate">Add template</button>
-        <button
-          v-on:click="deleteTemplate(currentTemplate)"
-          :disabled="currentTemplate === 0"
-        >
-          Delete current template
-        </button>
         <button v-on:click="clipIt">Clip it!</button>
       </div>
     </div>
     <script src="../Vue_v2.6.11.js"></script>
+    <script src="../components/page-template.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
