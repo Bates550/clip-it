@@ -23,3 +23,4 @@ BUGS
 x First template doesn't clipit?
 
 - Can't add templates after deleting them sometimes because id generation is not unique
+- Need keys for variables, and therefore need ids?

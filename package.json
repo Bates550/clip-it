@@ -1,0 +1,23 @@
+{
+  "name": "clipboard-it",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "git@github.com:Bates550/clip-it.git",
+  "author": "Sean Spearman <smspearmandev@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "babel-loader": "^8.1.0",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependenciesComments": {
+    "vue-template-compiler": "vue-template-compiler should be the same version as vue"
+  }
+}

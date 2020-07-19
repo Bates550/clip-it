@@ -5,35 +5,7 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="app">
-      <div style="display: flex; flex-direction: column;">
-        <div style="display: flex; flex-direction: row;">
-          View:
-          <button v-on:click="setPage('template')">Templates</button>
-          <button v-on:click="setPage('variable')">Variables</button>
-        </div>
-
-        <page-template
-          v-if="page === 'template'"
-          :current-template="currentTemplate"
-          :templates="templates"
-          @add-template="addTemplate"
-          @change-template="currentTemplate = $event.target.value"
-        ></page-template>
-
-        <page-variable
-          v-if="page === 'variable'"
-          :variables="variables"
-          @remove-variable="removeVariable"
-          @add-variable="addVariable"
-        ></page-variable>
-
-        <button v-on:click="clipIt">Clip it!</button>
-      </div>
-    </div>
-    <script src="../Vue_v2.6.11.js"></script>
-    <script src="../components/page-template.js"></script>
-    <script src="../components/page-variable.js"></script>
-    <script src="script.js"></script>
+    <div id="app"></div>
+    <script src="dist/bundle.js"></script>
   </body>
 </html>
