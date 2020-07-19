@@ -9,37 +9,31 @@
       <div style="display: flex; flex-direction: column;">
         <div style="display: flex; flex-direction: row;">
           View:
-          <button v-on:click="setPage('templates')">Templates</button>
-          <button v-on:click="setPage('variables')">Variables</button>
+          <button v-on:click="setPage('template')">Templates</button>
+          <button v-on:click="setPage('variable')">Variables</button>
         </div>
 
         <page-template
-          v-if="page === 'templates'"
+          v-if="page === 'template'"
           :current-template="currentTemplate"
           :templates="templates"
           @add-template="addTemplate"
           @change-template="currentTemplate = $event.target.value"
         ></page-template>
 
-        <section style="display: flex; flex-direction: column;">
-          <div
-            v-for="(variable, i) in variables"
-            style="display: flex; flex-direction: column;"
-          >
-            <label>Variable Name<input v-model="variable.name" /></label>
-            <label
-              >Variable Query<textarea v-model="variable.query"></textarea>
-            </label>
-            <button v-on:click="removeVariable(i)">Remove</button>
-          </div>
-        </section>
+        <page-variable
+          v-if="page === 'variable'"
+          :variables="variables"
+          @remove-variable="removeVariable"
+          @add-variable="addVariable"
+        ></page-variable>
 
-        <button v-on:click="addVariable">Add variable</button>
         <button v-on:click="clipIt">Clip it!</button>
       </div>
     </div>
     <script src="../Vue_v2.6.11.js"></script>
     <script src="../components/page-template.js"></script>
+    <script src="../components/page-variable.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

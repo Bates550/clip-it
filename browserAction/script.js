@@ -1,7 +1,7 @@
 const vm = new Vue({
   el: "#app",
   data: {
-    page: "templates", // 'templates' | 'variables'
+    page: "template", // 'template' | 'variable'
     currentTemplate: 0,
     templates: {
       0: {
@@ -77,6 +77,9 @@ const vm = new Vue({
         localStorage.setItem("variables", JSON.stringify(this.variables));
       },
       deep: true,
+    },
+    page: function () {
+      localStorage.setItem("page", JSON.stringify(this.page));
     },
   },
   mounted() {
