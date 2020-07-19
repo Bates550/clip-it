@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "repository": "git@github.com:Bates550/clip-it.git",
-  "author": "Sean Spearman <smspearmandev@gmail.com>",
+  "author": [
+    "Sean Spearman <smspearmandev@gmail.com>",
+    "Yushi Canastra <ycanastra@gmail.com>"
+  ],
   "license": "MIT",
   "private": true,
   "dependencies": {
