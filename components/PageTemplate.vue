@@ -16,7 +16,7 @@ export default {
           v-for="template in templates"
           :key="template.id"
           :value="template.id"
-          >{{ template.name || "Untitled " + template.id }}</option
+          >{{ template.name }}</option
         >
       </select></label
     >

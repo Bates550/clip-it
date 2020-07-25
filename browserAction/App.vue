@@ -22,6 +22,7 @@
     ></page-variable>
 
     <button v-on:click="clipIt">Clip it!</button>
+    <button @click="clearLocalStorage">Clear localStorage</button>
   </div>
 </template>
 
@@ -36,13 +37,14 @@ export default {
     PageVariable,
   },
   data: function() {
+    const initialTemplateId = 0;
     return {
       page: "template", // 'template' | 'variable'
-      currentTemplate: 0,
+      currentTemplate: initialTemplateId,
       templates: {
-        0: {
-          id: 0,
-          name: "",
+        [initialTemplateId]: {
+          id: initialTemplateId,
+          name: `Untitled ${initialTemplateId}`,
           format: "",
         },
       },
@@ -62,12 +64,15 @@ export default {
       const newId = Object.keys(this.templates).length;
       Vue.set(this.templates, newId, {
         id: newId,
-        name: "",
+        name: `Untitled ${newId}`,
         format: "",
       });
     },
     addVariable: function() {
       this.variables.push({ name: "", query: "" });
+    },
+    clearLocalStorage: function() {
+      window.localStorage.clear();
     },
     clipIt: function() {
       const variablesString = JSON.stringify(this.variables);
