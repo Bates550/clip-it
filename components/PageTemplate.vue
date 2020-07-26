@@ -6,16 +6,15 @@ export default {
 
 <template>
   <section style="display: flex; flex-direction: column">
+    <pre></pre>
     <label
       >Selected Template
-      <select
-        v-on:change="$emit('change-template', $event)"
-        v-bind:value="currentTemplate"
-      >
+      <select @change="$emit('change-template', $event)">
         <option
           v-for="template in templates"
           :key="template.id"
           :value="template.id"
+          :selected="template.id === currentTemplate"
           >{{ template.name }}</option
         >
       </select></label
@@ -29,7 +28,7 @@ export default {
     <button v-on:click="$emit('add-template')">Add template</button>
     <button
       @click="$emit('delete-template', currentTemplate)"
-      :disabled="currentTemplate === 0"
+      :disabled="currentTemplate === '0'"
     >
       Delete current template
     </button>

@@ -39,7 +39,7 @@ export default {
     PageVariable,
   },
   data: function() {
-    const initialTemplateId = 0;
+    const initialTemplateId = "0";
     return {
       page: "template", // 'template' | 'variable'
       currentTemplate: initialTemplateId,
@@ -106,7 +106,7 @@ export default {
     },
     deleteTemplate: function(templateId) {
       Vue.delete(this.templates, templateId);
-      this.currentTemplate = 0;
+      this.currentTemplate = "0";
     },
     removeVariable: function(i) {
       this.variables.splice(i, 1);
