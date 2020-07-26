@@ -64,11 +64,23 @@ export default {
     },
     addTemplate: function() {
       const newId = uuid();
+      let i = 0;
+      let newName = `Untitled ${i}`;
+      let isNewNameTaken = !!Object.values(this.templates).find(
+        (template) => template.name === newName
+      );
+      while (isNewNameTaken) {
+        newName = `Untitled ${++i}`;
+        isNewNameTaken = !!Object.values(this.templates).find(
+          (template) => template.name === newName
+        );
+      }
       Vue.set(this.templates, newId, {
         id: newId,
-        name: `Untitled ${newId}`,
+        name: newName,
         format: "",
       });
+      this.currentTemplate = newId;
     },
     addVariable: function() {
       this.variables.push({ name: "", query: "" });
