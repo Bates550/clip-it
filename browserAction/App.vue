@@ -12,6 +12,7 @@
       :templates="templates"
       @add-template="addTemplate"
       @change-template="currentTemplate = $event.target.value"
+      @delete-template="deleteTemplate"
     ></page-template>
 
     <page-variable

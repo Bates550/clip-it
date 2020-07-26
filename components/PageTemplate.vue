@@ -28,8 +28,7 @@ export default {
     </label>
     <button v-on:click="$emit('add-template')">Add template</button>
     <button
-      v-on:click="deleteTemplate(currentTemplate)"
-      :disabled="currentTemplate === 0"
+      @click="$emit('delete-template', currentTemplate)"
     >
       Delete current template
     </button>
