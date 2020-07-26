@@ -10,6 +10,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "uuid": "^8.2.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {

@@ -29,6 +29,7 @@
 
 <script>
 import Vue from "vue";
+import { v4 as uuid } from "uuid";
 import PageTemplate from "../components/PageTemplate.vue";
 import PageVariable from "../components/PageVariable.vue";
 
@@ -62,7 +63,7 @@ export default {
       this.page = pageName;
     },
     addTemplate: function() {
-      const newId = Object.keys(this.templates).length;
+      const newId = uuid();
       Vue.set(this.templates, newId, {
         id: newId,
         name: `Untitled ${newId}`,
