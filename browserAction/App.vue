@@ -18,7 +18,7 @@
     <page-variable
       v-if="page === 'variable'"
       :variables="variables"
-      @remove-variable="removeVariable"
+      @delete-variable="deleteVariable"
       @add-variable="addVariable"
     ></page-variable>
 
@@ -52,6 +52,7 @@ export default {
       },
       variables: [
         {
+          id: uuid(),
           name: "",
           query: "",
         },
@@ -83,7 +84,7 @@ export default {
       this.currentTemplate = newId;
     },
     addVariable: function() {
-      this.variables.push({ name: "", query: "" });
+      this.variables.push({ id: uuid(), name: "", query: "" });
     },
     clearLocalStorage: function() {
       window.localStorage.clear();
@@ -108,7 +109,7 @@ export default {
       Vue.delete(this.templates, templateId);
       this.currentTemplate = "0";
     },
-    removeVariable: function(i) {
+    deleteVariable: function(i) {
       this.variables.splice(i, 1);
     },
   },
