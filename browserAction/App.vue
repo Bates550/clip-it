@@ -1,29 +1,46 @@
 <template>
-  <div style="display: flex; flex-direction: column;">
-    <div style="display: flex; flex-direction: row;">
-      View:
-      <button v-on:click="setPage('template')">Templates</button>
-      <button v-on:click="setPage('variable')">Variables</button>
+  <div
+    style="
+      background-color: brown;
+      background-image: url('../assets/clipboard_texture_by_the_auteur_stock.jpg/');
+      border-radius: 16px;
+      padding: 10px;
+    "
+  >
+    <div
+      style="
+        padding: 10px;
+        background-color: #f0f0dc;
+        border-radius: 1px;
+        box-shadow: 1px 1px 5px 0px #393935
+      "
+    >
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex; flex-direction: row;">
+          <button v-on:click="setPage('template')">Templates</button>
+          <button v-on:click="setPage('variable')">Variables</button>
+        </div>
+
+        <page-template
+          v-if="page === 'template'"
+          :current-template="currentTemplate"
+          :templates="templates"
+          @add-template="addTemplate"
+          @change-template="currentTemplate = $event.target.value"
+          @delete-template="deleteTemplate"
+        ></page-template>
+
+        <page-variable
+          v-if="page === 'variable'"
+          :variables="variables"
+          @delete-variable="deleteVariable"
+          @add-variable="addVariable"
+        ></page-variable>
+
+        <button v-on:click="clipIt">Clip it!</button>
+        <button @click="clearLocalStorage">Clear localStorage</button>
+      </div>
     </div>
-
-    <page-template
-      v-if="page === 'template'"
-      :current-template="currentTemplate"
-      :templates="templates"
-      @add-template="addTemplate"
-      @change-template="currentTemplate = $event.target.value"
-      @delete-template="deleteTemplate"
-    ></page-template>
-
-    <page-variable
-      v-if="page === 'variable'"
-      :variables="variables"
-      @delete-variable="deleteVariable"
-      @add-variable="addVariable"
-    ></page-variable>
-
-    <button v-on:click="clipIt">Clip it!</button>
-    <button @click="clearLocalStorage">Clear localStorage</button>
   </div>
 </template>
 
