@@ -5,6 +5,7 @@
       background-image: url('../assets/clipboard_texture_by_the_auteur_stock.jpg/');
       border-radius: 16px;
       padding: 10px;
+      box-shadow: 1px 1px 5px 0px #393935
     "
   >
     <div
