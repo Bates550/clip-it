@@ -9,6 +9,9 @@
   ],
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "dev": "webpack --watch"
+  },
   "dependencies": {
     "uuid": "^8.2.0",
     "vue": "^2.6.11"
