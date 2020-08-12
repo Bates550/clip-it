@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "clipboard-it",
   "description": "Gather information from open web pages, format it, and put it on your clipboard.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "icons": {
     "64": "icons/icon.png"
   },
