@@ -20,6 +20,7 @@
         <div style="display: flex; flex-direction: row;">
           <button v-on:click="setPage('template')">Templates</button>
           <button v-on:click="setPage('variable')">Variables</button>
+          <button v-on:click="setPage('error')">Errors</button>
         </div>
 
         <page-template
@@ -38,6 +39,8 @@
           @add-variable="addVariable"
         ></page-variable>
 
+        <page-error v-if="page === 'error'" :errors="errors"></page-error>
+
         <button v-on:click="clipIt">Clip it!</button>
         <button @click="clearLocalStorage">Clear localStorage</button>
       </div>
@@ -50,21 +53,18 @@ import Vue from "vue";
 import { v4 as uuid } from "uuid";
 import PageTemplate from "../components/PageTemplate.vue";
 import PageVariable from "../components/PageVariable.vue";
-
-function update(message) {
-  console.log(message);
-}
-browser.runtime.onMessage.addListener(update);
+import PageError from "../components/PageError.vue";
 
 export default {
   components: {
     PageTemplate,
     PageVariable,
+    PageError,
   },
   data: function() {
     const initialTemplateId = "0";
     return {
-      page: "template", // 'template' | 'variable'
+      page: "template", // 'template' | 'variable' | 'error'
       currentTemplate: initialTemplateId,
       templates: {
         [initialTemplateId]: {
@@ -80,11 +80,15 @@ export default {
           query: "",
         },
       ],
+      errors: [],
     };
   },
   methods: {
     setPage: function(pageName) {
       this.page = pageName;
+    },
+    setErrors: function(errors) {
+      this.errors = errors;
     },
     addTemplate: function() {
       const newId = uuid();
@@ -127,10 +131,10 @@ export default {
           errorMessage = e.message;
         }
 
-        return { 
+        return {
           result,
           name: variable.name,
-          errorMessage, 
+          errorMessage,
         };
       });
 
@@ -168,6 +172,12 @@ export default {
       },
       deep: true,
     },
+    errors: {
+      handler: function() {
+        localStorage.setItem("errors", JSON.stringify(this.errors));
+      },
+      deep: true,
+    },
     page: function() {
       localStorage.setItem("page", JSON.stringify(this.page));
     },
@@ -188,6 +198,13 @@ export default {
       if (localStorageValue) {
         this[key] = JSON.parse(localStorageValue);
       }
+    });
+
+    browser.runtime.onMessage.addListener((queryResults) => {
+      const errors = queryResults
+        .filter((result) => result.errorMessage)
+        .map((result) => ({ name: result.name, message: result.errorMessage }));
+      this.setErrors(errors);
     });
   },
 };
