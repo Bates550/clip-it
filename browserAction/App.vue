@@ -51,6 +51,11 @@ import { v4 as uuid } from "uuid";
 import PageTemplate from "../components/PageTemplate.vue";
 import PageVariable from "../components/PageVariable.vue";
 
+function update(message) {
+  console.log(message);
+}
+browser.runtime.onMessage.addListener(update);
+
 export default {
   components: {
     PageTemplate,
@@ -113,13 +118,23 @@ export default {
         code: `(function() {
       let variables = ${variablesString};
       let queryResults = variables.map((variable) => {
+        let result;
+        let errorMessage;
+
+        try {
+          result = eval(variable.query)
+        } catch(e) {
+          errorMessage = e.message;
+        }
+
         return { 
-          result: eval(variable.query),
-          name: variable.name
+          result,
+          name: variable.name,
+          errorMessage, 
         };
       });
 
-      browser.runtime.sendMessage(queryResults);
+      browser.runtime.sendMessage(queryResults)
     })()`,
       });
     },
