@@ -9,7 +9,7 @@ function update(message) {
     return acc.replace(`%${query.name}`, query.result);
   }, format);
 
-  console.log(result);
+  console.log("copied to clipboard", result);
 
   navigator.clipboard.writeText(result);
 }
