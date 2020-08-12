@@ -118,8 +118,9 @@ export default {
     },
     clipIt: function() {
       const variablesString = JSON.stringify(this.variables);
-      browser.tabs.executeScript({
-        code: `(function() {
+      browser.tabs
+        .executeScript({
+          code: `(function() {
       let variables = ${variablesString};
       let queryResults = variables.map((variable) => {
         let result;
@@ -139,8 +140,18 @@ export default {
       });
 
       browser.runtime.sendMessage(queryResults)
+      return queryResults;
     })()`,
-      });
+        })
+        .then(([queryResults]) => {
+          const errors = queryResults
+            .filter((result) => result.errorMessage)
+            .map((result) => ({
+              name: result.name,
+              message: result.errorMessage,
+            }));
+          this.setErrors(errors);
+        });
     },
     deleteTemplate: function(templateId) {
       Vue.delete(this.templates, templateId);
@@ -198,13 +209,6 @@ export default {
       if (localStorageValue) {
         this[key] = JSON.parse(localStorageValue);
       }
-    });
-
-    browser.runtime.onMessage.addListener((queryResults) => {
-      const errors = queryResults
-        .filter((result) => result.errorMessage)
-        .map((result) => ({ name: result.name, message: result.errorMessage }));
-      this.setErrors(errors);
     });
   },
 };
