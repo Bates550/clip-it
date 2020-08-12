@@ -151,6 +151,10 @@ export default {
               message: result.errorMessage,
             }));
           this.setErrors(errors);
+
+          if (errors.length > 0) {
+            this.setPage("error");
+          }
         });
     },
     deleteTemplate: function(templateId) {
