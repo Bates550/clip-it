@@ -5,9 +5,6 @@
 - Make format input provide an autocomplete list of variables when you type "%"
 - Get Vue devtools working
 - add a dotenv and make a publish npm script
-- Add a permanent addon id
-  - https://extensionworkshop.com/documentation/develop/extensions-and-the-add-on-id/
-  - Need to do this when publishing via AMO API otherwise it publishes a new extension each time rather than updating the original one
 - Settings export / import
   - So I can update versions without losing my settings
 - How to deploy this?
@@ -28,10 +25,16 @@
 - Use templates within other templates? Maybe another symbol for using template names like "#"
 - Store of premade templates
   - Could support versioning in case a website's markup changes
-  - Probably a HUGE security concern
+  - Probably a HUGE security concern since you now have 3rd party code being eval'd
 
 ### DONE
 
+x ~Add a permanent addon id~ - Accomplished by presence of `.web-extension-id`
+  - Seems like by committing the .web-extension-id file and keeping it around, `yarn web-ext sign` will use that auto-generated id.
+    When `.web-extension-id` is present it produces this message:
+    "Using previously auto-generated extension ID: {6a56daea-ddad-44d8-a44b-56e94454a8b9}"
+  - https://extensionworkshop.com/documentation/develop/extensions-and-the-add-on-id/
+  - Need to do this when publishing via AMO API otherwise it publishes a new extension each time rather than updating the original one
 x Errors are shown if any variable cannot be run on a page even if it's unused by the current template. Seems like all variables are being evaluated?
   - Fixed by only running query for variables in use by the current template in the executed script in App.vue
 x First template doesn't clipit?
