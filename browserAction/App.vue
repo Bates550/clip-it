@@ -117,11 +117,18 @@ export default {
       window.localStorage.clear();
     },
     clipIt: function() {
-      const variablesString = JSON.stringify(this.variables);
+      const currentFormat = this.templates[this.currentTemplate].format;
+      const variablesInUse = Array.from(
+        currentFormat.matchAll(/%\w*/g)
+      ).map(matches => matches[0].slice(1));
+      const variablesUsedInCurrentTemplate = this.variables.filter(variable => {
+        return variablesInUse.includes(variable);
+      });
+
       browser.tabs
         .executeScript({
           code: `(function() {
-      let variables = ${variablesString};
+      let variables = ${JSON.stringify(variablesUsedInCurrentTemplate)};
       let queryResults = variables.map((variable) => {
         let result;
         let errorMessage;

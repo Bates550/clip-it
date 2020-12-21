@@ -14,9 +14,7 @@
 
 ### BUGS
 
-- Errors are shown if any variable cannot be run on a page even if it's unused by the current template. Seems like all variables are being evaluated?
 - Clipboard background image doesn't load when installed on local FF
-
 
 ### IDEAS
 
@@ -30,6 +28,8 @@
 
 ### DONE
 
+x Errors are shown if any variable cannot be run on a page even if it's unused by the current template. Seems like all variables are being evaluated?
+  - Fixed by only running query for variables in use by the current template in the executed script in App.vue
 x First template doesn't clipit?
 x Can't add templates after deleting them sometimes because id generation is not unique
 x Need keys for variables, and therefore need ids?
