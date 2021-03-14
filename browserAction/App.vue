@@ -43,7 +43,7 @@
 
         <button v-on:click="clipIt">Clip it!</button>
         <button @click="clearLocalStorage">Clear localStorage</button>
-        <a v-bind:href="`data:application/octet-stream;charset=utf-16le;base64,${encodeLocalStorage()}`" download="export.json">Export!</a>
+        <export />
       </div>
     </div>
   </div>
@@ -55,10 +55,11 @@ import { v4 as uuid } from "uuid";
 import PageTemplate from "../components/PageTemplate.vue";
 import PageVariable from "../components/PageVariable.vue";
 import PageError from "../components/PageError.vue";
-import {exportLocalStorage} from "./utils/exportImport";
+import Export from "../components/Export.vue";
 
 export default {
   components: {
+    Export,
     PageTemplate,
     PageVariable,
     PageError,
@@ -173,9 +174,6 @@ export default {
     deleteVariable: function(i) {
       this.variables.splice(i, 1);
     },
-    encodeLocalStorage: function() {
-      return btoa(exportLocalStorage());
-    }
   },
   watch: {
     currentTemplate: function() {
