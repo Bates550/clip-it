@@ -1,6 +1,5 @@
 ### TODO
 
-- add a dotenv and make a publish npm script
 - investigate using extension storage instead of local storage.
 - Generecize watch logic so that we don't have to watch every key in our state
 - Make format input provide an autocomplete list of variables when you type "%"
@@ -29,6 +28,7 @@
 
 ### DONE
 
+x add a dotenv and make a publish npm script
 x ~Add a permanent addon id~ - Accomplished by presence of `.web-extension-id`
   - Seems like by committing the .web-extension-id file and keeping it around, `yarn web-ext sign` will use that auto-generated id.
     When `.web-extension-id` is present it produces this message:
