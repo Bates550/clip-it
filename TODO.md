@@ -1,10 +1,10 @@
 ### TODO
 
+- add a dotenv and make a publish npm script
 - investigate using extension storage instead of local storage.
 - Generecize watch logic so that we don't have to watch every key in our state
 - Make format input provide an autocomplete list of variables when you type "%"
 - Get Vue devtools working
-- add a dotenv and make a publish npm script
 - Settings export / import
   - So I can update versions without losing my settings
 - How to deploy this?
