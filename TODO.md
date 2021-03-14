@@ -1,10 +1,10 @@
 ### TODO
 
+- Settings import
 - investigate using extension storage instead of local storage.
 - Generecize watch logic so that we don't have to watch every key in our state
 - Make format input provide an autocomplete list of variables when you type "%"
 - Get Vue devtools working
-- Settings export / import
   - So I can update versions without losing my settings
 - How to deploy this?
   - web-ext sign with api-key and api-secret from https://addons.mozilla.org/en-US/developers/addon/api/key/
@@ -28,6 +28,7 @@
 
 ### DONE
 
+x Settings export
 x add a dotenv and make a publish npm script
 x ~Add a permanent addon id~ - Accomplished by presence of `.web-extension-id`
   - Seems like by committing the .web-extension-id file and keeping it around, `yarn web-ext sign` will use that auto-generated id.
