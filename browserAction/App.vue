@@ -42,7 +42,6 @@
         <page-error v-if="page === 'error'" :errors="errors"></page-error>
 
         <button v-on:click="clipIt">Clip it!</button>
-        <button @click="clearLocalStorage">Clear localStorage</button>
         <export />
         <import :sync-from-local-storage="syncFromLocalStorage" />
       </div>
@@ -118,9 +117,6 @@ export default {
     },
     addVariable: function() {
       this.variables.push({ id: uuid(), name: "", query: "" });
-    },
-    clearLocalStorage: function() {
-      window.localStorage.clear();
     },
     clipIt: function() {
       const currentFormat = this.templates[this.currentTemplate].format;
