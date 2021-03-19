@@ -120,7 +120,7 @@ export default {
       this.variables.push({ id: uuid(), name: "", query: "" });
     },
     clearLocalStorage: function() {
-      window.Storage.clear();
+      window.localStorage.clear();
     },
     clipIt: function() {
       const currentFormat = this.templates[this.currentTemplate].format;
@@ -188,53 +188,44 @@ export default {
   },
   watch: {
     currentTemplate: function() {
-      Storage.setItem("currentTemplate", JSON.stringify(this.currentTemplate));
+      localStorage.setItem(
+        "currentTemplate",
+        JSON.stringify(this.currentTemplate)
+      );
     },
     format: function() {
-      Storage.setItem("format", JSON.stringify(this.format));
+      localStorage.setItem("format", JSON.stringify(this.format));
     },
     templates: {
       handler: function() {
-        Storage.setItem("templates", JSON.stringify(this.templates));
+        localStorage.setItem("templates", JSON.stringify(this.templates));
       },
       deep: true,
     },
     variables: {
       handler: function() {
-        Storage.setItem("variables", JSON.stringify(this.variables));
+        localStorage.setItem("variables", JSON.stringify(this.variables));
       },
       deep: true,
     },
     errors: {
       handler: function() {
-        Storage.setItem("errors", JSON.stringify(this.errors));
+        localStorage.setItem("errors", JSON.stringify(this.errors));
       },
       deep: true,
     },
     page: function() {
-      Storage.setItem("page", JSON.stringify(this.page));
+      localStorage.setItem("page", JSON.stringify(this.page));
     },
   },
   mounted() {
-    window.Storage = {
-      clear: () => localStorage.clear(),
-      getItem: (...args) => localStorage.getItem(...args),
-      setItem: (key, value, options = { isImporting: false }) => {
-        localStorage.setItem(key, value);
-        if (options.isImporting) {
-          const event = new Event("storageImport");
-          document.dispatchEvent(event);
-        }
-      },
-    };
-
     // Initialize localStorage
-    if (!Storage.getItem("isLocalStorageInitialized")) {
+    if (!localStorage.getItem("isLocalStorageInitialized")) {
       Object.keys(this.$data).forEach((key) => {
-        Storage.setItem(key, JSON.stringify(this.$data[key]));
+        localStorage.setItem(key, JSON.stringify(this.$data[key]));
       });
 
-      Storage.setItem("isLocalStorageInitialized", true);
+      localStorage.setItem("isLocalStorageInitialized", true);
     }
 
     // Initialize Vue state

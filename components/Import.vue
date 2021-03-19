@@ -12,7 +12,7 @@ export default {
       const file = event.target.files[0];
       file.text().then((fileContent) => {
         Object.entries(JSON.parse(fileContent)).forEach(([key, value]) => {
-          Storage.setItem(key, JSON.stringify(value), { isImporting: true });
+          localStorage.setItem(key, JSON.stringify(value));
         });
         this.syncFromLocalStorage();
       });
