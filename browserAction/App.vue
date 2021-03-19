@@ -41,7 +41,7 @@
 
         <page-error v-if="page === 'error'" :errors="errors"></page-error>
 
-        <button v-on:click="clipIt">Clip it!</button>
+        <button style="margin-top: 20px;" v-on:click="clipIt">Clip it!</button>
         <export />
         <import :sync-from-local-storage="syncFromLocalStorage" />
       </div>
