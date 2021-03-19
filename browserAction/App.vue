@@ -44,7 +44,7 @@
         <button v-on:click="clipIt">Clip it!</button>
         <button @click="clearLocalStorage">Clear localStorage</button>
         <export />
-        <import />
+        <import :sync-from-local-storage="syncFromLocalStorage" />
       </div>
     </div>
   </div>
@@ -177,6 +177,14 @@ export default {
     deleteVariable: function(i) {
       this.variables.splice(i, 1);
     },
+    syncFromLocalStorage: function() {
+      Object.keys(this.$data).forEach((key) => {
+        const localStorageValue = localStorage.getItem(key);
+        if (localStorageValue) {
+          this[key] = JSON.parse(localStorageValue);
+        }
+      });
+    },
   },
   watch: {
     currentTemplate: function() {
@@ -220,15 +228,6 @@ export default {
       },
     };
 
-    document.addEventListener("storageImport", () => {
-      Object.keys(this.$data).forEach((key) => {
-        const localStorageValue = localStorage.getItem(key);
-        if (localStorageValue) {
-          this[key] = JSON.parse(localStorageValue);
-        }
-      });
-    });
-
     // Initialize localStorage
     if (!Storage.getItem("isLocalStorageInitialized")) {
       Object.keys(this.$data).forEach((key) => {
@@ -239,12 +238,7 @@ export default {
     }
 
     // Initialize Vue state
-    Object.keys(this.$data).forEach((key) => {
-      const localStorageValue = Storage.getItem(key);
-      if (localStorageValue) {
-        this[key] = JSON.parse(localStorageValue);
-      }
-    });
+    this.syncFromLocalStorage();
   },
 };
 </script>

@@ -6,6 +6,7 @@
 </template>
 <script>
 export default {
+  props: ["syncFromLocalStorage"],
   methods: {
     onUpload: function(event) {
       const file = event.target.files[0];
@@ -13,6 +14,7 @@ export default {
         Object.entries(JSON.parse(fileContent)).forEach(([key, value]) => {
           Storage.setItem(key, JSON.stringify(value), { isImporting: true });
         });
+        this.syncFromLocalStorage();
       });
     },
   },
