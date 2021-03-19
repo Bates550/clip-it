@@ -1,6 +1,5 @@
 ### TODO
 
-- Settings import
 - investigate using extension storage instead of local storage.
 - Generecize watch logic so that we don't have to watch every key in our state
 - Make format input provide an autocomplete list of variables when you type "%"
@@ -27,7 +26,7 @@
   - Probably a HUGE security concern since you now have 3rd party code being eval'd
 
 ### DONE
-
+x Settings import
 x Settings export
 x add a dotenv and make a publish npm script
 x ~Add a permanent addon id~ - Accomplished by presence of `.web-extension-id`
